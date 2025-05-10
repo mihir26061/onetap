@@ -12,8 +12,10 @@ class User(AbstractUser):
     def __str__(self):
         return self.username
 
+    class Meta:
+        db_table = 'user'
 
-# Social Auth for login/signup via Google, Facebook, Apple
+
 class SocialAccount(models.Model):
     PROVIDER_CHOICES = (
         ('google', 'Google'),
@@ -22,8 +24,11 @@ class SocialAccount(models.Model):
     )
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     provider = models.CharField(max_length=20, choices=PROVIDER_CHOICES)
-    provider_id = models.CharField(max_length=100)  # external provider ID
+    provider_id = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'social_account'
 
 
 class CardCategory(models.Model):
@@ -31,6 +36,9 @@ class CardCategory(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        db_table = 'card_category'
 
 
 class Card(models.Model):
@@ -41,6 +49,9 @@ class Card(models.Model):
 
     def __str__(self):
         return f"Card {self.id} - {self.owner.username}"
+
+    class Meta:
+        db_table = 'card'
 
 
 class UserCard(models.Model):
@@ -56,6 +67,9 @@ class UserCard(models.Model):
     def __str__(self):
         return self.business_card_name
 
+    class Meta:
+        db_table = 'user_card'
+
 
 class UserService(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='services')
@@ -63,6 +77,9 @@ class UserService(models.Model):
 
     def __str__(self):
         return f"Service for {self.user.username}"
+
+    class Meta:
+        db_table = 'user_service'
 
 
 class UserWork(models.Model):
@@ -72,16 +89,25 @@ class UserWork(models.Model):
     def __str__(self):
         return f"Work for {self.user.username}"
 
+    class Meta:
+        db_table = 'user_work'
+
 
 class Cart(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='cart')
     created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'cart'
 
 
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='items')
     card = models.ForeignKey(Card, on_delete=models.CASCADE)
     added_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'cart_item'
 
 
 class Payment(models.Model):
@@ -90,13 +116,19 @@ class Payment(models.Model):
     status = models.CharField(max_length=50)
     paid_at = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        db_table = 'payment'
+
 
 class CardReview(models.Model):
     card = models.ForeignKey(Card, on_delete=models.CASCADE, related_name='reviews')
     reviewer = models.ForeignKey(User, on_delete=models.CASCADE)
-    star = models.PositiveIntegerField()  # out of 5
+    star = models.PositiveIntegerField()
     description = models.TextField()
     reviewed_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"Review by {self.reviewer.username} - {self.star} Stars"
+
+    class Meta:
+        db_table = 'card_review'
