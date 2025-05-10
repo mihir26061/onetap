@@ -1,0 +1,81 @@
+# Django #
+*.log
+*.pot
+*.pyc
+__pycache__
+db.sqlite3
+media
+__pycache__/ 
+# Backup files # 
+*.bak 
+
+# IntelliJ
+out/
+
+# Distribution / packaging 
+.Python build/ 
+develop-eggs/ 
+dist/ 
+downloads/ 
+eggs/ 
+.eggs/ 
+lib/ 
+lib64/ 
+parts/ 
+sdist/ 
+var/ 
+wheels/ 
+*.whl
+*.egg-info/ 
+.installed.cfg 
+*.egg 
+*.manifest 
+*.spec 
+
+# Unit test / coverage reports 
+htmlcov/ 
+.tox/ 
+.coverage 
+.coverage.* 
+.cache 
+.pytest_cache/ 
+nosetests.xml 
+coverage.xml 
+*.cover 
+.hypothesis/ 
+
+# Jupyter Notebook 
+.ipynb_checkpoints 
+
+# pyenv 
+.python-version 
+
+# Environments 
+.env 
+.my_env 
+.venv
+env/
+my_env/ 
+venv/ 
+ENV/ 
+env.bak/ 
+my_env.bak/ 
+venv.bak/ 
+
+# Visual Studio Code # 
+.vscode
+.vscode/* 
+!.vscode/settings.json 
+!.vscode/tasks.json 
+!.vscode/launch.json 
+!.vscode/extensions.json 
+.history
+
+# Assets and Report Folder #
+viewshed/*
+viewshed/
+assets/
+assets/*
+qgisdata/
+.codegpt
+ga4apipython-453205-06f7f77cd7c9.json
